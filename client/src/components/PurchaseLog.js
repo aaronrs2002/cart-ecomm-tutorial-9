@@ -31,14 +31,12 @@ const PurchaseLog = (props) => {
 
 
     useEffect(() => {
-        console.log("JSON.stringify(props.timeSelected): " + JSON.stringify(props.timeSelected));
         if (props.timeSelected.length > 0 && loaded === false) {
             let tempUsers = [];
             let tempPrice = 0;
             for (let i = 0; i < props.timeSelected.length; i++) {
                 let userEmail = props.timeSelected[i].saleId.substring(0, props.timeSelected[i].saleId.indexOf(":"));
                 tempPrice = parseInt(tempPrice) + parseInt(props.timeSelected[i].price);
-                console.log("tempPrice: " + tempPrice);
                 if (tempUsers.indexOf(userEmail) === -1) {
                     tempUsers.push(userEmail);
                 }
@@ -69,14 +67,9 @@ const PurchaseLog = (props) => {
                 <ul className="list-group ">
                     {props.timeSelected ?
                         props.timeSelected.map((sale, i) => {
-
-
                             if ((sale.itemName + sale.saleId).indexOf(search) !== -1 || search === "default") {
                                 sumTotal = Number(sumTotal) + Number(sale.price);
-                                console.log("sumTotal: " + sumTotal)
                             }
-
-
                             return <li key={i} className={(sale.itemName + sale.saleId).indexOf(search) !== -1 || search === "default" ? "list-group-item" : "hide"} ><span className="capitalize">{sale.itemName}</span>{" - $" + sale.price} <span className="badge badge-secondary">{sale.saleId}</span></li>
                         })
                         : null}
