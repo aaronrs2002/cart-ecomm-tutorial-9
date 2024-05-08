@@ -7,8 +7,8 @@ const { checkToken } = require("../../auth/token_validation");
 
 
 //SERVER SIDE GET REVIEWS OF SPECIFIC ITEM
-router.get("/:itemName", (req, res) => {
-    let sql = `SELECT * FROM reviews WHERE itemName = '${req.params.itemName}' ORDER BY userTimestamp`;
+router.get("/:itemName", checkToken, (req, res) => {
+    let sql = `SELECT * FROM reviews WHERE itemName = '${req.params.itemName.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' ORDER BY userTimestamp`;
     let query = db.query(sql, (err, results) => {
         if (err) {
             console.log("Error: " + err);
@@ -19,8 +19,8 @@ router.get("/:itemName", (req, res) => {
 });
 
 //SERVER SIDE GET REVIEWS FROM SPECIFIC USER
-router.get("/user/:email", (req, res) => {
-    let sql = `SELECT * FROM reviews WHERE email = '${req.params.email}'  ORDER BY userTimestamp`;
+router.get("/user/:email", checkToken, (req, res) => {
+    let sql = `SELECT * FROM reviews WHERE email = '${req.params.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}'  ORDER BY userTimestamp`;
     let query = db.query(sql, (err, results) => {
         if (err) {
             console.log("Error: " + err);
@@ -51,8 +51,8 @@ router.post("/add-review", checkToken, (req, res) => {
 });
 
 //SERVER SIDE DELETE REVIEW
-router.delete("/remove-review/:userTimestamp", (req, res) => {
-    let sql = `DELETE FROM reviews WHERE userTimestamp = '${req.params.userTimestamp}' ORDER BY userTimestamp`;
+router.delete("/remove-review/:userTimestamp", checkToken, (req, res) => {
+    let sql = `DELETE FROM reviews WHERE userTimestamp = '${req.params.userTimestamp.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' ORDER BY userTimestamp`;
     let query = db.query(sql, (err, result) => {
         if (err) {
             console.log("Error: " + err);
