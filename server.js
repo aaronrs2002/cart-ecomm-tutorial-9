@@ -69,7 +69,7 @@ const getUserByUserEmail = (email, callback) => {
 
 app.post("/login", (req, res) => {
     const body = req.body;
-    getUserByUserEmail(body.email, (err, results) => {
+    getUserByUserEmail(body.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, ''), (err, results) => {
         if (err) {
             console.log(err);
             if (err === "ECONNRESET") {
@@ -96,7 +96,7 @@ app.post("/login", (req, res) => {
             );
 
             if (jsontoken) {
-                let sql = `UPDATE user SET token = '${jsontoken}' WHERE email = "${body.email}"`;
+                let sql = `UPDATE user SET token = '${jsontoken}' WHERE email = "${body.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}}"`;
                 let query = db.query(sql, (err, result) => {
                     if (err) {
                         console.log("There was an error on the server side: " + err);
