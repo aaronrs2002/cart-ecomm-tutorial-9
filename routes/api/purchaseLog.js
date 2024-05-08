@@ -7,7 +7,8 @@ const { checkToken } = require("../../auth/token_validation");
 
 //SERVER SIDE GET PURCHASE WITHING SPECIFIC TIME FRAME REQUESTED 
 router.get("/ordersFrom/:timeFrame", checkToken, (req, res) => {
-    let sql = `SELECT * FROM purchaseLog WHERE saleId LIKE '%${req.params.timeFrame}%' ORDER BY saleId`;
+    console.log("What time frame: " + req.params.timeFrame);
+    let sql = `SELECT * FROM purchaseLog WHERE saleId LIKE '%${req.params.timeFrame.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}%' ORDER BY saleId`;
     let query = db.query(sql, (err, results) => {
         if (err) {
             console.log("Error: " + err);
@@ -20,7 +21,7 @@ router.get("/ordersFrom/:timeFrame", checkToken, (req, res) => {
 
 //SERVER SIDE GET PURCHASE FROM SPECIFIC USER
 router.get("/ordersFromUser/:email", checkToken, (req, res) => {
-    let prepEmail = req.params.email + ":";
+    let prepEmail = req.params.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '') + ":";
     let sql = `SELECT * FROM purchaseLog WHERE saleId LIKE '%${prepEmail}%'  ORDER BY saleId`;
     let query = db.query(sql, (err, results) => {
         if (err) {
@@ -35,7 +36,7 @@ router.get("/ordersFromUser/:email", checkToken, (req, res) => {
 
 //SERVER SIDE GET PURCHASE FROM SPECIFIC itemName
 router.get("/ordersByName/:itemName", checkToken, (req, res) => {
-    let sql = `SELECT * FROM purchaseLog WHERE itemName = '${req.params.itemName}'`;
+    let sql = `SELECT * FROM purchaseLog WHERE itemName = '${req.params.itemName.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}'`;
     let query = db.query(sql, (err, results) => {
         if (err) {
             console.log("Error: " + err);
