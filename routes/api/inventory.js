@@ -25,8 +25,8 @@ router.post("/order-product", checkToken, (req, res) => {
 
 
 //SERVER SIDE GET INVENTORY LOG FOR SPECIFIC ITEM
-router.get("/:itemName", (req, res) => {
-    let sql = `SELECT * FROM inventory WHERE itemName = '${req.params.itemName}' ORDER BY userTimestamp DESC`;
+router.get("/:itemName", checkToken, (req, res) => {
+    let sql = `SELECT * FROM inventory WHERE itemName = '${req.params.itemName.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' ORDER BY userTimestamp DESC`;
     let query = db.query(sql, (err, results) => {
         if (err) {
             console.log("Error: " + err);
@@ -40,7 +40,7 @@ router.get("/:itemName", (req, res) => {
 //SERVER SIDE UPDATE ORDER STATUS
 
 router.put("/update-order-status", checkToken, (req, res) => {
-    let sql = `UPDATE inventory SET status = '${req.body.status}' WHERE userTimestamp = '${req.body.userTimestamp}' ORDER BY userTimestamp DESC`;
+    let sql = `UPDATE inventory SET status = '${req.body.status.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' WHERE userTimestamp = '${req.body.userTimestamp.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' ORDER BY userTimestamp DESC`;
     let query = db.query(sql, (err, result) => {
         if (err) {
             console.log("Error: " + err);
