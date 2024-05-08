@@ -96,12 +96,12 @@ app.post("/login", (req, res) => {
             );
 
             if (jsontoken) {
-                let sql = `UPDATE user SET token = '${jsontoken}' WHERE email = "${body.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}}"`;
+                let sql = `UPDATE user SET token = '${jsontoken}' WHERE email = "${body.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}"`;
                 let query = db.query(sql, (err, result) => {
                     if (err) {
                         console.log("There was an error on the server side: " + err);
                     } else {
-                        console.log("That worked. here is the token result: " + JSON.stringify(result));
+                        console.log("Here is the token result: " + JSON.stringify(result));
                     }
                 });
                 console.log("trying to fire saved token.");
@@ -178,6 +178,7 @@ app.get("/level/:email", checkToken, (req, res) => {
 
 //START REFRESH
 app.get("/check-token/:email", checkToken, (req, res) => {
+
     let sql = `SELECT token FROM user WHERE email = '${req.params.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}'`;
     let query = db.query(sql, (err, results) => {
         if (err) {
