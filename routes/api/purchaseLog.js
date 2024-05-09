@@ -38,7 +38,7 @@ router.get("/ordersFromUser/:email", checkToken, (req, res) => {
 router.get("/ordersByName/:itemName", checkToken, (req, res) => {
     // let sql = `SELECT * FROM purchaseLog WHERE itemName = '${req.params.itemName.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}'`;
     let query = db.query(
-        `SELECT * FROM purchaseLog WHERE itemName = ?`
+        `SELECT * FROM purchaseLog WHERE itemName = ?`,
         [req.params.itemName],
         (err, results) => {
             if (err) {
