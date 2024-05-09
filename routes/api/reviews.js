@@ -8,26 +8,32 @@ const { checkToken } = require("../../auth/token_validation");
 
 //SERVER SIDE GET REVIEWS OF SPECIFIC ITEM
 router.get("/:itemName", checkToken, (req, res) => {
-    let sql = `SELECT * FROM reviews WHERE itemName = '${req.params.itemName.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' ORDER BY userTimestamp`;
-    let query = db.query(sql, (err, results) => {
-        if (err) {
-            console.log("Error: " + err);
-        } else {
-            res.send(results);
-        }
-    })
+    // let sql = `SELECT * FROM reviews WHERE itemName = '${req.params.itemName.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' ORDER BY userTimestamp`;
+    let query = db.query(
+        `SELECT * FROM reviews WHERE itemName = ? ORDER BY userTimestamp`,
+        [req.params.itemName],
+        (err, results) => {
+            if (err) {
+                console.log("Error: " + err);
+            } else {
+                res.send(results);
+            }
+        })
 });
 
 //SERVER SIDE GET REVIEWS FROM SPECIFIC USER
 router.get("/user/:email", checkToken, (req, res) => {
-    let sql = `SELECT * FROM reviews WHERE email = '${req.params.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}'  ORDER BY userTimestamp`;
-    let query = db.query(sql, (err, results) => {
-        if (err) {
-            console.log("Error: " + err);
-        } else {
-            res.send(results);
-        }
-    })
+    //  let sql = `SELECT * FROM reviews WHERE email = '${req.params.email.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}'  ORDER BY userTimestamp`;
+    let query = db.query(
+        `SELECT * FROM reviews WHERE email = ?  ORDER BY userTimestamp`,
+        [req.params.email],
+        (err, results) => {
+            if (err) {
+                console.log("Error: " + err);
+            } else {
+                res.send(results);
+            }
+        })
 });
 
 //SERVER SIDE ADD REVIEW
@@ -52,14 +58,17 @@ router.post("/add-review", checkToken, (req, res) => {
 
 //SERVER SIDE DELETE REVIEW
 router.delete("/remove-review/:userTimestamp", checkToken, (req, res) => {
-    let sql = `DELETE FROM reviews WHERE userTimestamp = '${req.params.userTimestamp.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' ORDER BY userTimestamp`;
-    let query = db.query(sql, (err, result) => {
-        if (err) {
-            console.log("Error: " + err);
-        } else {
-            res.send(result);
-        }
-    })
+    // let sql = `DELETE FROM reviews WHERE userTimestamp = '${req.params.userTimestamp.replace(/[&\/\\#,+()$~%'"*?|<>{}“]/g, '')}' ORDER BY userTimestamp`;
+    let query = db.query(
+        `DELETE FROM reviews WHERE userTimestamp = ? ORDER BY userTimestamp`,
+        [req.params.userTimestamp],
+        (err, result) => {
+            if (err) {
+                console.log("Error: " + err);
+            } else {
+                res.send(result);
+            }
+        })
 })
 
 
