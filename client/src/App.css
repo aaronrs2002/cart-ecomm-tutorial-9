@@ -1,32 +1,56 @@
 /*start here*/
 footer {
   box-shadow: 0 -4px 3px rgba(0, 0, 0, 0.075);
-  /* position: fixed;
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  z-index: 2;*/
+  z-index: 5;
 }
 
-.container,
-.container-fluid {
+[class^="apexcharts-text"],
+[class^="apexcharts-title"],
+.apexcharts-legend-text {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+/*.container {
   padding-top: 80px;
+}*/
+
+.capitalize {
+  text-transform: capitalize;
 }
 
-[data-chart] {
-  background-color: #f8f8f8;
-  border-radius: 5px;
+.error {
+  border: #ff0000 1px solid;
 }
 
-#invoiceAddrWrap img[alt='logo'] {
-  max-width: 150px;
-  height: auto;
+.hide {
+  display: none;
 }
 
-#clockInOutWindow {
-  max-height: 500px;
+.btn-group.form-control {
+  padding: 0;
+
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.yellowStar {
+  color: yellow;
+}
+
+
+
+.cartPanel .list-group {
+  max-height: 400px;
   overflow-y: auto;
 }
+
 
 div.animated[role="alert"] {
   margin-top: 5%;
@@ -35,30 +59,96 @@ div.animated[role="alert"] {
   width: 100%;
 }
 
-.error {
-  border: #ff0000 solid 1px;
-}
 
-.hide {
-  display: none;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.block,
-.btn-group.block {
+img.inventoryImg {
+  /* max-width: 150px; */
+  max-height: 75px;
   width: 100%;
-  padding: 0px
+  padding: 0px 2px;
+  overflow: hidden;
+  border-radius: 5px;
+  border: solid #fff 1px;
 }
 
-.btn.btn-primary.active,
-.card-title.active {
-  color: yellow !important;
+.inventoryWrapper {
+  display: inline-block;
+  width: 75px;
+
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 2px;
 }
 
-/*start loader animation*/
+.inventoryWrapper .btn {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.inventoryWrapper button {
+
+  width: 100%;
+  display: block;
+  font-size: small;
+}
+
+/*START SOP TEASER CSS*/
+.productPreviewImg {
+  width: 200px;
+}
+
+.cardImgWrapper {
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.previewPanel {
+  height: 255px;
+
+}
+
+.row.navPadding.animated.bounceInUp {
+  margin-bottom: 5rem;
+}
+
+.previewPanel .text-primary {
+  color: #fff !important;
+}
+
+.productPreviewImg {
+  width: 200px;
+}
+
+.productThumb.active {
+  border: 5px solid #80ff80;
+}
+
+.productThumb {
+  height: 60px;
+  overflow: hidden;
+  padding: 0;
+  background-color: #ccc;
+  border: 5px solid #ccc;
+}
+
+.selectedProdActiveImg {
+  padding-left: 0px;
+}
+
+.itemDescription ul li,
+.decimal {
+  list-style-type: decimal;
+}
+
+.productThumb img {
+  width: 200px;
+  /* position: absolute;*/
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+
 /*start loader animation*/
 .loader {
   border: 16px solid #f3f3f3;
@@ -80,12 +170,6 @@ div.animated[role="alert"] {
     transform: rotate(360deg);
   }
 }
-
-/*START PRINT MEDIA*/
-.printOnly {
-  display: none;
-}
-
 
 @media print {
 
@@ -109,43 +193,70 @@ div.animated[role="alert"] {
 }
 
 
-.chartHeightMatch {
-  max-height: 355px;
-  overflow-y: auto;
-}
 
 
 /*END PRINT MEDIA*/
 
-.mobileOnly {
-  display: none;
-}
+
+
+/*START MOBILE CSS*/
 
 .desktopOnly {
   display: block;
 }
 
-.printOnly {
-  display: none;
+.mobileOnly {
+  display: none !important;
 }
 
-@media (max-width: 768px) {
+
+.mobileBlock {
+  width: auto;
+}
+
+@media (max-width: 992px) {
+  .mobileShow {
+    display: block !important;
+  }
+
+
+  .desktopOnly {
+    display: none !important;
+  }
 
   .mobileOnly {
     display: block;
   }
 
-  .desktopOnly {
-    display: none;
+  .mobileBlock {
+    display: block;
+    width: 100%;
   }
 
+  .productPreviewImg {
+    width: 150px;
+  }
 
-  .chartHeightMatch,
-  #clockInOutWindow {
-    max-height: inherit;
-    overflow-y: inherit;
+  footer {
+
+    position: inherit;
 
   }
+
 
 
 }
+
+/*end 768*/
+
+/*start 767
+@media (max-width: 767px) {
+  .badge {
+    display: block;
+    width: 100%;
+  }
+
+  .container.my-5 {
+    margin-bottom: 8rem !important;
+  }
+}*/
