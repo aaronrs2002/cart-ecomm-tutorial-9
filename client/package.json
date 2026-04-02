@@ -53,5 +53,6 @@
   "start": "webpack --config ./webpack/webpack.config.js",
   "devDependencies": {
     "@babel/plugin-transform-private-property-in-object": "^7.22.11"
-  }
+  },
+  "keywords": []
 }
