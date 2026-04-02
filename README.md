@@ -1,5 +1,6 @@
 # cart-ecomm-tutorial-9
-By Aaron Smith - web-presence llc - We start with a basic cart with an inventory module. Next, we build a sales log and analytics. This multi user application gets put into over drive when we add order vs sales inventory ordering module and an order and review history.
+By Aaron Smith – Web-Presence LLC.
+This tutorial walks through building a full-featured e-commerce application using React, Node.js, and MySQL. We begin with a foundational shopping cart and inventory management system, then expand into a sales log with built-in analytics. As the application evolves into a multi-user platform, we introduce advanced features such as inventory ordering based on sales trends, along with complete order and review history tracking. The result is a scalable system that demonstrates real-world e-commerce functionality from front end to database.
 
 Here is the YouTube lesson playlist:
 https://www.youtube.com/playlist?list=PLxaq32Ptw4pkHgzkOzkTkFJiVMp60iav-
